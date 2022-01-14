@@ -3,6 +3,7 @@ import './App.css'
 import Keyboard from 'react-simple-keyboard'
 import 'react-simple-keyboard/build/css/index.css'
 
+import Grid from './components/Grid'
 
 function App() {
   return (
@@ -13,117 +14,9 @@ function App() {
           KERRDLE
         </header>
 
-        <div className="gameBoard">
+        <div className="gridContainer">
 
-          <div className="cellContainer">
-
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-            <div className="cell">
-              A
-            </div>
-
-
-          </div>
+          <Grid />
 
         </div>
 
