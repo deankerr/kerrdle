@@ -52,8 +52,31 @@ header {
 .keyboard {
   /* border: 1px red dotted; */
   border-top: 2px black solid;
-  height: 250px;
+  /* height: 250px; */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+}
+
+.simple-keyboard {
+  color: black;
+  background-color: black;
+}
+
+.simple-keyboard.hg-theme-default.hg-layout-default {
+  background-color: #282c34;
+}
+
+.simple-keyboard.hg-layout-default .hg-button.hg-standardBtn {
+  background-color: rgb(221, 221, 221);
+  height: 60px;
+}
+
+.simple-keyboard.hg-layout-default .hg-button.hg-functionBtn.hg-button-enter {
+  background-color: rgb(221, 221, 221);
+  height: 60px;
+}
+
+.simple-keyboard.hg-layout-default .hg-button.hg-functionBtn.hg-button-bksp {
+  background-color: rgb(221, 221, 221);
+  height: 60px;
 }

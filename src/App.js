@@ -138,6 +138,12 @@ function App() {
                 ]
               }
             }
+            display={
+              {
+                '{bksp}': '⌫',
+                '{enter}': 'ENTER'
+              }
+            }
           />
         </div>
       </div>
