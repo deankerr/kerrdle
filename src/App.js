@@ -28,14 +28,16 @@ function App() {
   const [message, setMessage] = useState('')
 
   const [board, setBoard] = useState(INITIAL_BOARD)
+
   const [attempt, setAttempt] = useState(0)
+
   const [curLetter, setCurLetter] = useState(0)
 
   const [targetWord, setTargetWord] = useState("TIGER") // TODO: Pull random world from list
 
 
   function checkAnswer() {
-
+    
     const answer = board[attempt].join('')
     console.log('Checking answer:', answer);
 
@@ -49,6 +51,7 @@ function App() {
       setGameOver(true)
     }
 
+    // TODO: Check if word in word list
 
     else {
       setMessage('Wrong!!!')
@@ -67,7 +70,9 @@ function App() {
 
   }
 
+
   function onKeyPress(button) {
+
     if (gameOver) return
 
     setMessage('')
@@ -92,6 +97,7 @@ function App() {
       // console.log('newBoard:', newBoard)
       setCurLetter(curLetter + 1)
     }
+
   }
 
 
@@ -111,14 +117,10 @@ function App() {
         </div>
 
         <div className="gameArea">
-          
           <Grid board={board} />
-
         </div>
 
-
         <div className="keyboard">
-
           <Keyboard
             layout={
               {
@@ -137,7 +139,6 @@ function App() {
             }
             onKeyPress={onKeyPress}
           />
-
         </div>
 
       </div>
