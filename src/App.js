@@ -25,6 +25,8 @@ function App() {
 
   const [gameOver, setGameOver] = useState(false)
 
+  const [message, setMessage] = useState('')
+
   const [board, setBoard] = useState(INITIAL_BOARD)
   const [attempt, setAttempt] = useState(0)
   const [curLetter, setCurLetter] = useState(0)
@@ -38,20 +40,22 @@ function App() {
     console.log('Checking answer:', answer);
 
     if (answer.length < WORD_LENGTH) {
-      console.log('Word too short!!');
+      setMessage('Word too short!!')
     }
 
+
     else if (answer === targetWord) {
-      console.log('Correct!');
+      setMessage('You win!')
       setGameOver(true)
     }
 
+
     else {
-      console.log('Wrong!!');
+      setMessage('Wrong!!!')
       let newAttempt = attempt + 1
 
       if (newAttempt === MAX_ATTEMPTS) {
-        console.log('Game Over!!!');
+        setMessage('Game Over!!!')
         setGameOver(true)
       }
 
@@ -66,7 +70,7 @@ function App() {
   function onKeyPress(button) {
     if (gameOver) return
 
-    console.log('Button pressed', button)
+    setMessage('')
 
     if (button === '{enter}') checkAnswer()
 
@@ -76,7 +80,7 @@ function App() {
         let newCurLetter = curLetter - 1
         newBoard[attempt][newCurLetter] = ''
         setBoard(newBoard)
-        console.log('newBoard:', newBoard)
+        // console.log('newBoard:', newBoard)
         setCurLetter(newCurLetter)
       }
     }
@@ -85,7 +89,7 @@ function App() {
       let newBoard = board
       newBoard[attempt][curLetter] = button
       setBoard(newBoard)
-      console.log('newBoard:', newBoard)
+      // console.log('newBoard:', newBoard)
       setCurLetter(curLetter + 1)
     }
   }
@@ -100,8 +104,14 @@ function App() {
           KERRDLE
         </header>
 
-        <div className="gameArea">
+        <div className="messageContainer">
+          <div className="messageBox">
+            {message}
+          </div>
+        </div>
 
+        <div className="gameArea">
+          
           <Grid board={board} />
 
         </div>
