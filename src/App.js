@@ -29,13 +29,43 @@ function App() {
   const [attempt, setAttempt] = useState(0)
   const [curLetter, setCurLetter] = useState(0)
 
-  const [word, setWord] = useState("TIGER") // TODO: Pull random world from list
+  const [targetWord, setTargetWord] = useState("TIGER") // TODO: Pull random world from list
+
 
   function checkAnswer() {
-      return // TODO...
+
+    const answer = board[attempt].join('')
+    console.log('Checking answer:', answer);
+
+    if (answer.length < WORD_LENGTH) {
+      console.log('Word too short!!');
+    }
+
+    else if (answer === targetWord) {
+      console.log('Correct!');
+      setGameOver(true)
+    }
+
+    else {
+      console.log('Wrong!!');
+      let newAttempt = attempt + 1
+
+      if (newAttempt === MAX_ATTEMPTS) {
+        console.log('Game Over!!!');
+        setGameOver(true)
+      }
+
+      else {
+        setAttempt(attempt + 1)
+        setCurLetter(0)
+      }
+    }
+
   }
 
   function onKeyPress(button) {
+    if (gameOver) return
+
     console.log('Button pressed', button)
 
     if (button === '{enter}') checkAnswer()
@@ -48,7 +78,7 @@ function App() {
         setBoard(newBoard)
         console.log('newBoard:', newBoard)
         setCurLetter(newCurLetter)
-      } 
+      }
     }
 
     else if (curLetter !== WORD_LENGTH) {
