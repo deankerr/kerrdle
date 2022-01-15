@@ -23,12 +23,43 @@ for (let i = 0; i < MAX_ATTEMPTS; i++) {
 
 function App() {
 
-  const [ gameOver, setGameOver ] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
 
-  const [ board, setBoard ] = useState(INITIAL_BOARD)
-  const [ attempt, setAttempt ] = useState(0)
+  const [board, setBoard] = useState(INITIAL_BOARD)
+  const [attempt, setAttempt] = useState(0)
+  const [curLetter, setCurLetter] = useState(0)
 
-  const [ word, setWord ] = useState("TIGER") // TODO: Pull random world from list
+  const [word, setWord] = useState("TIGER") // TODO: Pull random world from list
+
+  function checkAnswer() {
+      return // TODO...
+  }
+
+  function onKeyPress(button) {
+    console.log('Button pressed', button)
+
+    if (button === '{enter}') checkAnswer()
+
+    else if (button === '{bksp}') {
+      if (curLetter > 0) {
+        let newBoard = board
+        let newCurLetter = curLetter - 1
+        newBoard[attempt][newCurLetter] = ''
+        setBoard(newBoard)
+        console.log('newBoard:', newBoard)
+        setCurLetter(newCurLetter)
+      } 
+    }
+
+    else if (curLetter !== WORD_LENGTH) {
+      let newBoard = board
+      newBoard[attempt][curLetter] = button
+      setBoard(newBoard)
+      console.log('newBoard:', newBoard)
+      setCurLetter(curLetter + 1)
+    }
+  }
+
 
   return (
     <div className="App">
@@ -64,6 +95,7 @@ function App() {
                 '{enter}': 'ENTER'
               }
             }
+            onKeyPress={onKeyPress}
           />
 
         </div>
