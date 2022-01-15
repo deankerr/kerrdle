@@ -14,7 +14,7 @@ function App() {
           KERRDLE
         </header>
 
-        <div className="gridContainer">
+        <div className="gameArea">
 
           <Grid />
 
