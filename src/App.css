@@ -59,6 +59,18 @@ header {
   font-weight: 600;
 }
 
+.cell.match {
+  background-color: rgb(43, 134, 15)
+}
+
+.cell.misplaced {
+  background-color: rgb(187, 175, 13)
+}
+
+.cell.wrong {
+  background-color: #000;
+}
+
 .keyboard {
   /* border: 1px red dotted; */
   border-top: 2px black solid;

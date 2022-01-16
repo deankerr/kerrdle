@@ -6,9 +6,13 @@ export default function Grid(props) {
   let id = 0
   board.forEach(row => {
     row.forEach(cell => {
+      let cellColour = ''
+      if (cell.match) cellColour = ' match'
+      if (cell.misplaced) cellColour = ' misplaced'
+      if (cell.wrong) cellColour = ' wrong'
       grid.push(
-        <div className="cell" key={id}>
-          {cell}
+        <div className={'cell' + cellColour} key={id}>
+          {cell.value}
         </div>
       )
       id++
@@ -24,6 +28,5 @@ export default function Grid(props) {
       }
 
     </div>
-
   )
 }

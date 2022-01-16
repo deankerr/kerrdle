@@ -15,7 +15,7 @@ let INITIAL_BOARD = []
 for (let i = 0; i < MAX_ATTEMPTS; i++) {
   let row = []
   for (let j = 0; j < WORD_LENGTH; j++) {
-    row.push('')
+    row.push({ value: '', match: false, misplaced: false, wrong: false })
   }
   INITIAL_BOARD.push(row)
 }
@@ -37,24 +37,21 @@ function App() {
 
 
   function checkAnswer() {
-    
-    const answer = board[attempt].join('')
+
+    let answer = ''
+    board[attempt].forEach(e => {
+      answer = answer + e.value
+    })
+
     console.log('Checking answer:', answer);
 
     if (answer.length < WORD_LENGTH) {
       setMessage('Word too short!!')
     }
 
-
-    else if (answer === targetWord) {
-      setMessage('You win!')
-      setGameOver(true)
-    }
-
     // TODO: Check if word in word list
 
     else {
-      setMessage('Wrong!!!')
       let newAttempt = attempt + 1
 
       if (newAttempt === MAX_ATTEMPTS) {
@@ -63,8 +60,28 @@ function App() {
       }
 
       else {
-        setAttempt(attempt + 1)
-        setCurLetter(0)
+        let letter = 0
+        // Find matching/misplaced letters in guess
+        board[attempt].forEach(e => {
+          console.log(e.value, 'match', targetWord[letter]);
+          if (e.value === targetWord[letter]) {
+            e.match = true
+          } else if (targetWord.includes(e.value)) {
+            e.misplaced = true
+          } else {
+            e.wrong = true
+          }
+          letter++
+        })
+
+        if (answer === targetWord) {
+          setMessage('You win!')
+          setGameOver(true)
+        } else {
+          setAttempt(attempt + 1)
+          setCurLetter(0)
+        }
+
       }
     }
 
@@ -83,7 +100,7 @@ function App() {
       if (curLetter > 0) {
         let newBoard = board
         let newCurLetter = curLetter - 1
-        newBoard[attempt][newCurLetter] = ''
+        newBoard[attempt][newCurLetter].value = ''
         setBoard(newBoard)
         // console.log('newBoard:', newBoard)
         setCurLetter(newCurLetter)
@@ -92,7 +109,7 @@ function App() {
 
     else if (curLetter !== WORD_LENGTH) {
       let newBoard = board
-      newBoard[attempt][curLetter] = button
+      newBoard[attempt][curLetter].value = button
       setBoard(newBoard)
       // console.log('newBoard:', newBoard)
       setCurLetter(curLetter + 1)
