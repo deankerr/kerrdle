@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.cb7b9088.css",
-    "main.js": "/react-gh-pages/static/js/main.56d73033.js",
-    "static/js/787.13231b1a.chunk.js": "/react-gh-pages/static/js/787.13231b1a.chunk.js",
-    "index.html": "/react-gh-pages/index.html",
-    "main.cb7b9088.css.map": "/react-gh-pages/static/css/main.cb7b9088.css.map",
-    "main.56d73033.js.map": "/react-gh-pages/static/js/main.56d73033.js.map",
-    "787.13231b1a.chunk.js.map": "/react-gh-pages/static/js/787.13231b1a.chunk.js.map"
+    "main.css": "/kerrdle/static/css/main.cb7b9088.css",
+    "main.js": "/kerrdle/static/js/main.3f5de611.js",
+    "static/js/787.13231b1a.chunk.js": "/kerrdle/static/js/787.13231b1a.chunk.js",
+    "index.html": "/kerrdle/index.html",
+    "main.cb7b9088.css.map": "/kerrdle/static/css/main.cb7b9088.css.map",
+    "main.3f5de611.js.map": "/kerrdle/static/js/main.3f5de611.js.map",
+    "787.13231b1a.chunk.js.map": "/kerrdle/static/js/787.13231b1a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.cb7b9088.css",
-    "static/js/main.56d73033.js"
+    "static/js/main.3f5de611.js"
   ]
 }
