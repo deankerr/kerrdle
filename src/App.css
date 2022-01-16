@@ -1,13 +1,13 @@
 body {
   text-align: center;
   background-color: #282c34;
-  min-width: 700px;
 }
 
 .game {
   border: 2px black solid;
-  width: 500px;
-  height: 99vh;
+  width: 100%;
+  max-width: 500px;
+  height: 99.6vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
