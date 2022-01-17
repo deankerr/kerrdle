@@ -54,35 +54,35 @@ function App() {
     else {
       let newAttempt = attempt + 1
 
-      if (newAttempt === MAX_ATTEMPTS) {
+      let letter = 0
+      // Find matching/misplaced letters in guess
+      board[attempt].forEach(e => {
+        console.log(e.value, 'match', targetWord[letter]);
+        if (e.value === targetWord[letter]) {
+          e.match = true
+        } else if (targetWord.includes(e.value)) {
+          e.misplaced = true
+        } else {
+          e.wrong = true
+        }
+        letter++
+      })
+
+      if (answer === targetWord) {
+        setMessage('You win!')
+        setGameOver(true)
+      }
+
+      else if (newAttempt === MAX_ATTEMPTS) {
         setMessage('Game Over!!!')
         setGameOver(true)
       }
 
       else {
-        let letter = 0
-        // Find matching/misplaced letters in guess
-        board[attempt].forEach(e => {
-          console.log(e.value, 'match', targetWord[letter]);
-          if (e.value === targetWord[letter]) {
-            e.match = true
-          } else if (targetWord.includes(e.value)) {
-            e.misplaced = true
-          } else {
-            e.wrong = true
-          }
-          letter++
-        })
-
-        if (answer === targetWord) {
-          setMessage('You win!')
-          setGameOver(true)
-        } else {
-          setAttempt(attempt + 1)
-          setCurLetter(0)
-        }
-
+        setAttempt(attempt + 1)
+        setCurLetter(0)
       }
+
     }
 
   }
