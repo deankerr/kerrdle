@@ -84,7 +84,7 @@ function App() {
       }
 
       else if (newAttempt === MAX_ATTEMPTS) {
-        setMessage('Game Over!!!')
+        setMessage('Game Over!!! The word was: ' + targetWord)
         setGameOver(true)
       }
 
@@ -137,7 +137,7 @@ function App() {
         </header>
 
         <div className="messageContainer">
-          <div className="messageBox">
+          <div className={'messageBox' + (message && ' active')}>
             {message}
           </div>
         </div>
