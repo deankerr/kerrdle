@@ -6,6 +6,7 @@ import 'react-simple-keyboard/build/css/index.css'
 
 import Grid from './components/Grid'
 
+import words from './util/validwords.json'
 
 // Initial board generation
 const WORD_LENGTH = 5
@@ -20,6 +21,13 @@ for (let i = 0; i < MAX_ATTEMPTS; i++) {
   INITIAL_BOARD.push(row)
 }
 
+function isValidWord(word) {
+  return words.words.includes(word)
+}
+
+function getRandomWord() {
+  return words.words[Math.floor(Math.random() * words.words.length)]
+}
 
 function App() {
 
@@ -33,14 +41,14 @@ function App() {
 
   const [curLetter, setCurLetter] = useState(0)
 
-  const [targetWord, setTargetWord] = useState("TIGER") // TODO: Pull random world from list
-
+  const [targetWord, setTargetWord] = useState(getRandomWord())
+  console.log('targetWord', targetWord);
 
   function checkAnswer() {
 
     let answer = ''
     board[attempt].forEach(e => {
-      answer = answer + e.value
+      answer += e.value
     })
 
     console.log('Checking answer:', answer);
@@ -49,7 +57,9 @@ function App() {
       setMessage('Word too short!!')
     }
 
-    // TODO: Check if word in word list
+    else if (!isValidWord(answer)) {
+      setMessage('Invalid word!')
+    }
 
     else {
       let newAttempt = attempt + 1
@@ -57,7 +67,7 @@ function App() {
       let letter = 0
       // Find matching/misplaced letters in guess
       board[attempt].forEach(e => {
-        console.log(e.value, 'match', targetWord[letter]);
+        // console.log(e.value, 'match', targetWord[letter]);
         if (e.value === targetWord[letter]) {
           e.match = true
         } else if (targetWord.includes(e.value)) {
@@ -86,7 +96,6 @@ function App() {
     }
 
   }
-
 
   function onKeyPress(button) {
 
