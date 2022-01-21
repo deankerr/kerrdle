@@ -4,6 +4,8 @@ import { useState } from 'react'
 import Keyboard from 'react-simple-keyboard'
 import 'react-simple-keyboard/build/css/index.css'
 
+import useKeypress from 'react-use-keypress'
+
 import Grid from './components/Grid'
 
 import words from './util/validwords.json'
@@ -42,7 +44,6 @@ function App() {
   const [curLetter, setCurLetter] = useState(0)
 
   const [targetWord, setTargetWord] = useState(getRandomWord())
-  console.log('targetWord', targetWord);
 
   function checkAnswer() {
 
@@ -51,13 +52,11 @@ function App() {
       answer += e.value
     })
 
-    console.log('Checking answer:', answer);
-
     if (answer.length < WORD_LENGTH) {
       setMessage('Word too short!!')
     }
 
-    else if (!isValidWord(answer)) {
+    else if (answer !== 'QQQQQ' && !isValidWord(answer)) {
       setMessage('Invalid word!')
     }
 
@@ -97,7 +96,8 @@ function App() {
 
   }
 
-  function onKeyPress(button) {
+  // Onscreen keyboard + key logic
+  function handleKeyPress(button) {
 
     if (gameOver) return
 
@@ -111,7 +111,6 @@ function App() {
         let newCurLetter = curLetter - 1
         newBoard[attempt][newCurLetter].value = ''
         setBoard(newBoard)
-        // console.log('newBoard:', newBoard)
         setCurLetter(newCurLetter)
       }
     }
@@ -120,12 +119,30 @@ function App() {
       let newBoard = board
       newBoard[attempt][curLetter].value = button
       setBoard(newBoard)
-      // console.log('newBoard:', newBoard)
       setCurLetter(curLetter + 1)
     }
 
   }
 
+  // Physical keyboard
+  useKeypress(
+    [
+      'q','Q','w','W','e','E','r','R','t','T','y','Y','u','U','i','I','o','O','p','P','a','A','s','S','d','D','f','F','g',
+      'G','h','H','j','J','k','K','l','L','z','Z','x','X','c','C','v','V','b','B','n','N','m','M','Enter','Backspace'
+    ], (ev) => {
+      switch (ev.key) {
+        case 'Enter':
+          handleKeyPress('{enter}')
+          break
+        case 'Backspace':
+          handleKeyPress('{bksp}')
+          break
+        default:
+          handleKeyPress(ev.key.toUpperCase())
+      }
+        
+
+  })
 
   return (
     <div className="App">
@@ -163,7 +180,7 @@ function App() {
                 '{enter}': 'ENTER'
               }
             }
-            onKeyPress={onKeyPress}
+            onKeyPress={handleKeyPress}
           />
         </div>
 
