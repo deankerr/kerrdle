@@ -1,5 +1,7 @@
 # KERRDLE
 
+[Live Demo](https://deankerr.github.io/kerrdle/)
+
 An work in progress clone of the game [Wordle](https://www.powerlanguage.co.uk/wordle/). Made to practice React app
 development, and for fun.
 
