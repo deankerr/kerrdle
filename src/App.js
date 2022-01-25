@@ -61,20 +61,32 @@ function App() {
     }
 
     else {
-      let newAttempt = attempt + 1
+      const newAttempt = attempt + 1
+      let wordHints = targetWord
 
-      let letter = 0
-      // Find matching/misplaced letters in guess
-      board[attempt].forEach(e => {
-        // console.log(e.value, 'match', targetWord[letter]);
-        if (e.value === targetWord[letter]) {
-          e.match = true
-        } else if (targetWord.includes(e.value)) {
-          e.misplaced = true
-        } else {
-          e.wrong = true
+      // Find matching (green) letters
+      board[attempt].forEach((el, index) => {
+        if (el.value === targetWord[index]) {
+          el.match = true
+          // Delete matching char to prevent it being found again in next stage
+          wordHints = wordHints.substring(0, index) + ' ' + wordHints.substring(index + 1)
+          console.log('[match] new word hints:', wordHints);
         }
-        letter++
+      })
+
+      // Find misplaced (yellow letters)
+      board[attempt].forEach(el => {
+        if (!el.match && wordHints.includes(el.value)) {
+          el.misplaced = true
+          const misplacedChar = wordHints.indexOf(el.value)
+          wordHints = wordHints.substring(0, misplacedChar) + ' ' + wordHints.substring(misplacedChar + 1)
+          console.log('[misplaced] new word hints:', wordHints);
+        }
+      })
+
+      // Find remaining (wrong/black) letters
+      board[attempt].forEach(el => {
+        if (!el.match && !el.misplaced) el.wrong = true
       })
 
       if (answer === targetWord) {
@@ -127,10 +139,13 @@ function App() {
   // Physical keyboard
   useKeypress(
     [
-      'q','Q','w','W','e','E','r','R','t','T','y','Y','u','U','i','I','o','O','p','P','a','A','s','S','d','D','f','F','g',
-      'G','h','H','j','J','k','K','l','L','z','Z','x','X','c','C','v','V','b','B','n','N','m','M','Enter','Backspace'
+      'q', 'Q', 'w', 'W', 'e', 'E', 'r', 'R', 't', 'T', 'y', 'Y', 'u', 'U', 'i', 'I', 'o', 'O', 'p', 'P', 'a', 'A', 's', 'S', 'd', 'D', 'f', 'F', 'g',
+      'G', 'h', 'H', 'j', 'J', 'k', 'K', 'l', 'L', 'z', 'Z', 'x', 'X', 'c', 'C', 'v', 'V', 'b', 'B', 'n', 'N', 'm', 'M', 'Enter', 'Backspace', '`'
     ], (ev) => {
       switch (ev.key) {
+        case '`':
+          console.log('the target word is:', targetWord, ';)')
+          break
         case 'Enter':
           handleKeyPress('{enter}')
           break
@@ -140,9 +155,9 @@ function App() {
         default:
           handleKeyPress(ev.key.toUpperCase())
       }
-        
 
-  })
+
+    })
 
   return (
     <div className="App">

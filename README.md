@@ -4,7 +4,7 @@ An work in progress clone of the game [Wordle](https://www.powerlanguage.co.uk/w
 development, and for fun.
 
 ### TODO
-- If guess has two of the same letter and target word has one, make only one letter show up as yellow
-- Add keyboard support
 - Change on screen keyboard button colour if hint has been revealed
 - Use a list of common, non-obscure words for target words
+- Add a scoreboard
+- Add a link to share each specific puzzle
