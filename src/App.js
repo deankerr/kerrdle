@@ -46,8 +46,8 @@ function App() {
   const [targetWord, setTargetWord] = useState(getRandomWord())
 
   const [matchedLetters, setMatchedLetters] = useState('')
-
   const [misplacedLetters, setMisplacedLetters] = useState('')
+  const [wrongLetters, setWrongLetters] = useState('')
 
   function checkAnswer() {
 
@@ -99,9 +99,14 @@ function App() {
         setMisplacedLetters(misplacedLetters + newMisplacedLetters)
       })
 
+      let newWrongLetters = ''
       // Find remaining (wrong/black) letters
       board[attempt].forEach(el => {
-        if (!el.match && !el.misplaced) el.wrong = true
+        if (!el.match && !el.misplaced) {
+          el.wrong = true
+          newWrongLetters += el.value + ' '
+        }
+        setWrongLetters(wrongLetters + newWrongLetters)
       })
 
       if (answer === targetWord) {
@@ -217,6 +222,10 @@ function App() {
                 {
                   class: 'matchedButton',
                   buttons: matchedLetters
+                },
+                {
+                  class: 'wrongButton',
+                  buttons: wrongLetters
                 }
               ]
             }

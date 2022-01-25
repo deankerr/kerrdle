@@ -116,3 +116,8 @@ header {
 .simple-keyboard.hg-layout-default .hg-button.matchedButton {
   background-color: rgb(43, 134, 15);
 }
+
+.simple-keyboard.hg-layout-default .hg-button.wrongButton {
+  background-color: #000;
+  color: rgb(175, 173, 173);
+}
