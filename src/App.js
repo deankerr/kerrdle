@@ -45,6 +45,10 @@ function App() {
 
   const [targetWord, setTargetWord] = useState(getRandomWord())
 
+  const [matchedLetters, setMatchedLetters] = useState('')
+
+  const [misplacedLetters, setMisplacedLetters] = useState('')
+
   function checkAnswer() {
 
     let answer = ''
@@ -64,6 +68,7 @@ function App() {
       const newAttempt = attempt + 1
       let wordHints = targetWord
 
+      let newMatchedLetters = ''
       // Find matching (green) letters
       board[attempt].forEach((el, index) => {
         if (el.value === targetWord[index]) {
@@ -71,9 +76,15 @@ function App() {
           // Delete matching char to prevent it being found again in next stage
           wordHints = wordHints.substring(0, index) + ' ' + wordHints.substring(index + 1)
           console.log('[match] new word hints:', wordHints);
+
+          // Add matched letters to list for keyboard colouring
+          newMatchedLetters += el.value + ' '
         }
+
+        setMatchedLetters(matchedLetters + newMatchedLetters)
       })
 
+      let newMisplacedLetters = ''
       // Find misplaced (yellow letters)
       board[attempt].forEach(el => {
         if (!el.match && wordHints.includes(el.value)) {
@@ -81,7 +92,11 @@ function App() {
           const misplacedChar = wordHints.indexOf(el.value)
           wordHints = wordHints.substring(0, misplacedChar) + ' ' + wordHints.substring(misplacedChar + 1)
           console.log('[misplaced] new word hints:', wordHints);
+
+          // Add matched letters to list for keyboard colouring
+          newMisplacedLetters += el.value + ' '
         }
+        setMisplacedLetters(misplacedLetters + newMisplacedLetters)
       })
 
       // Find remaining (wrong/black) letters
@@ -155,8 +170,6 @@ function App() {
         default:
           handleKeyPress(ev.key.toUpperCase())
       }
-
-
     })
 
   return (
@@ -194,6 +207,18 @@ function App() {
                 '{bksp}': '⌫',
                 '{enter}': 'ENTER'
               }
+            }
+            buttonTheme={
+              [
+                {
+                  class: 'misplacedButton',
+                  buttons: misplacedLetters
+                },
+                {
+                  class: 'matchedButton',
+                  buttons: matchedLetters
+                }
+              ]
             }
             onKeyPress={handleKeyPress}
           />

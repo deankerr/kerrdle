@@ -66,11 +66,11 @@ header {
 }
 
 .cell.match {
-  background-color: rgb(43, 134, 15)
+  background-color: rgb(43, 134, 15);
 }
 
 .cell.misplaced {
-  background-color: rgb(187, 175, 13)
+  background-color: rgb(187, 175, 13);
 }
 
 .cell.wrong {
@@ -107,4 +107,12 @@ header {
 .simple-keyboard.hg-layout-default .hg-button.hg-functionBtn.hg-button-bksp {
   background-color: rgb(221, 221, 221);
   height: 60px;
+}
+
+.simple-keyboard.hg-layout-default .hg-button.misplacedButton {
+  background-color: rgb(187, 175, 13);
+}
+
+.simple-keyboard.hg-layout-default .hg-button.matchedButton {
+  background-color: rgb(43, 134, 15);
 }
